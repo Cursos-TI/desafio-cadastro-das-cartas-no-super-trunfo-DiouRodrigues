@@ -97,6 +97,7 @@ printf("****COMPARAÇÃO ENTRE AS CARTAS****\n\n");
 printf("CARTA DO JOGADOR 01 \n\nCARTA: %s\nEstado:%s\nCódigo:%s\nCidade: %s\nPopulação:%i\nArea: %.2f Km²\nPib: %.2f bilhões de reais\nNumero de pontos turisticos:%i\nDensidade populacional: %.2f hab/Km²\nPib per capita: %.2f reais\n\n",carta1,estado1,codigo1,cidade1,populacao1,area1,pib1,NumeroDePontosTuristicos1,densidadePopulacional1,pibPerCapita1);
 
 printf("CARTA DO JOGADOR 02 \n\nCARTA: %s\nEstado:%s\nCódigo:%s\nCidade: %s\nPopulação:%i\nArea: %.2f Km²\nPib: %.2f bilhões de reais\nNumero de pontos turisticos:%i\nDensidade populacional: %.2f hab/Km²\nPib per capita: %.2f reais\n\n",carta2,estado2,codigo2,cidade2,populacao2,area2,pib2,NumeroDePontosTuristicos2,densidadePopulacional2,pibPerCapita2);
+return 0;
 }
 
 //FIM DO CODIGO
