@@ -1,6 +1,6 @@
 //Todo printf Sera uma mensagem com informações sobre a partida como de quem é a vez ,ou mensagem dizendo oque deve ser digitado.
 //Na montagem das cartas ira conter os dados preenchidos pelos jogadores.
-//Nova função adicionada, agr o código calcula a densidade populacional e o pib per capita ***ATUALIZADO DIA 26/03/2025***.
+//Nova função adicionada, agr o código calcula a densidade populacional e o pib per capita ***ATUALIZADO DIA 26/03/2025 AS 21:46***.
 
 //INICIO DO CODIGO
 #include <stdio.h>
