@@ -1,6 +1,8 @@
 //Todo printf Sera uma mensagem com informações sobre a partida como de quem é a vez ,ou mensagem dizendo oque deve ser digitado.
 //Na montagem das cartas ira conter os dados preenchidos pelos jogadores.
-//Nova função adicionada, agr o código calcula a densidade populacional e o pib per capita ***ATUALIZADO DIA 26/03/2025 AS 21:46***.
+//Nova função adicionada, agr o código calcula a densidade populacional e o pib per capita ***ATUALIZADO DIA 26/03/2025***.
+/*Nova função adicionada, agr o código calcula a densidade populacional invertida e faz a comparação entre os 
+atributos de cada carta para determinar o jogador vencedor do duelo ***ATUALIZADO DIA 27/03/2025***.*/
 
 //INICIO DO CODIGO
 #include <stdio.h>
@@ -11,24 +13,39 @@ int main (){
     char estado1[4];
     char codigo1[20] ;
     char cidade1[20] ;
-    int populacao1;
+    unsigned long int populacao1;
     float area1;
     float pib1;
     int NumeroDePontosTuristicos1;
     float densidadePopulacional1;//AQUI O CODIGO FAZ A DIVISÃO DA POPULAÇÃO PELA AREA
+    float densidadePopulacionalInvertido1;//AQUI O CODIGO FAZ A DIVISÃO DA POPULAÇÃO POR 1 PARA INVERTER O RESULTADO  
     float pibPerCapita1;//AQUI O CODIGO FAZ A DIVISÃO DO PIB PELA POPULAÇÃO
+    float resultadoSuperPoder1;
 
     // Variaveis da carta 2
     char carta2[4];
     char estado2[4];
     char codigo2[20] ;
     char cidade2[20] ;
-    int populacao2;
+    unsigned long int populacao2;
     float area2;
     float pib2;
     int NumeroDePontosTuristicos2;
     float densidadePopulacional2;//AQUI O CODIGO FAZ A DIVISÃO DA POPULAÇÃO PELA AREA
+    float densidadePopulacionalInvertido2 ;//AQUI O CODIGO FAZ A DIVISÃO DA POPULAÇÃO POR 1 PARA INVERTER O RESULTADO
     float pibPerCapita2;//AQUI O CODIGO FAZ A DIVISÃO DO PIB PELA POPULAÇÃO
+    float resultadoSuperPoder2;
+
+//VARIAVEIS DE COMPARAÇÃO
+//ESTAS VARIAVEIS FARAM A COMPARAÇÃO ENTRE AS CARTAS DOS JOGADORES 1 E 2
+int resultadoPopulacao;
+int resultadoArea;
+int resultadoPIB;
+int resultadoPontosTuristicos;
+int resultadoDensidadePopulacional;
+int resultadoPIbPerCapita;
+float resultadoFinalSuperPoder;
+//FIM DAS VARIAVEIS DE COMPARAÇÃO
 
 //MONTAGEM DA CARTA DO JOGADOR NUMERO 1
 
@@ -48,7 +65,7 @@ printf("JOGADOR 01 \n digite a cidade da sua carta: \n");
 scanf("%s",cidade1);
 
 printf("JOGADOR 01 \n digite o numero de Habitantes da cidade em sua carta: \n");
-scanf("%i",&populacao1);
+scanf("%u",&populacao1);
 
 printf("JOGADOR 01 \n digite o tamanho da cidade em sua carta: \n");
 scanf("%f",&area1 );
@@ -58,9 +75,11 @@ scanf("%f",&pib1);
 
 printf("JOGADOR 01 \n digite o numero de pontos turisticos na cidade em sua carta: \n");
 scanf("%i",&NumeroDePontosTuristicos1);
-
+//AQUI SÃO FEITOS OS CALCULOS ANTES DO ENCERRAMENTO DA MONTAGEM DA CARTA.
 densidadePopulacional1 = (float)populacao1 / area1;
+densidadePopulacionalInvertido1 = (float)populacao1 / 1;
 pibPerCapita1 = (float)pib1 / populacao1;
+//FIM DA MONTAGEM DA CARTA DO JOGADOR 1
 
 printf("Agora é a vez do JOGADOR 2\n\n");//Texto informando que é a vez do proximo jogador
 
@@ -79,7 +98,7 @@ printf("JOGADOR 02 \n digite a cidade da sua carta: \n");
 scanf("%s",cidade2);
 
 printf("JOGADOR 02 \n digite o numero de Habitantes da cidade em sua carta: \n");
-scanf("%i",&populacao2);
+scanf("%u",&populacao2);
 
 printf("JOGADOR 02 \n digite o tamanho da cidade em sua carta: \n");
 scanf("%f",&area2 );
@@ -89,15 +108,44 @@ scanf("%f",&pib2);
 
 printf("JOGADOR 02 \n digite o numero de pontos turisticos na cidade em sua carta: \n");
 scanf("%i",&NumeroDePontosTuristicos2);
+//AQUI SÃO FEITOS OS CALCULOS ANTES DO ENCERRAMENTO DA MONTAGEM DA CARTA.
 densidadePopulacional2 = (float)populacao2 / area2;
+densidadePopulacionalInvertido2 = (float)populacao2 / 1;
 pibPerCapita2 = (float)pib2 / populacao2;
+//FIM DA MONTAGEM DA CARTA DO JOGADOR 2
 
-printf("****COMPARAÇÃO ENTRE AS CARTAS****\n\n");
+//CALCULOS DAS VARIAVEIS DE COMPARAÇÃO
+resultadoPopulacao = populacao1 > populacao2;
+resultadoArea = area1 > area2;
+resultadoPIB = pib1 > pib2;
+resultadoPontosTuristicos = NumeroDePontosTuristicos1 > NumeroDePontosTuristicos2;
+resultadoDensidadePopulacional = densidadePopulacional1 < densidadePopulacional2;
+resultadoPIbPerCapita = pibPerCapita1 > pibPerCapita2;
+resultadoSuperPoder1 = populacao1 + area1 + pib1 + NumeroDePontosTuristicos1 + pibPerCapita1 + densidadePopulacionalInvertido1 ;
+resultadoSuperPoder2 = populacao2 + area2 + pib2 + NumeroDePontosTuristicos2 + pibPerCapita2 + densidadePopulacionalInvertido2 ;
+resultadoFinalSuperPoder = resultadoSuperPoder1 > resultadoSuperPoder2;
+//FIM DOS CALCULOS DE COMPARAÇÃO
 
-printf("CARTA DO JOGADOR 01 \n\nCARTA: %s\nEstado:%s\nCódigo:%s\nCidade: %s\nPopulação:%i\nArea: %.2f Km²\nPib: %.2f bilhões de reais\nNumero de pontos turisticos:%i\nDensidade populacional: %.2f hab/Km²\nPib per capita: %.2f reais\n\n",carta1,estado1,codigo1,cidade1,populacao1,area1,pib1,NumeroDePontosTuristicos1,densidadePopulacional1,pibPerCapita1);
+printf("****INFORMAÇÕES DAS CARTAS****\n\n");
 
-printf("CARTA DO JOGADOR 02 \n\nCARTA: %s\nEstado:%s\nCódigo:%s\nCidade: %s\nPopulação:%i\nArea: %.2f Km²\nPib: %.2f bilhões de reais\nNumero de pontos turisticos:%i\nDensidade populacional: %.2f hab/Km²\nPib per capita: %.2f reais\n\n",carta2,estado2,codigo2,cidade2,populacao2,area2,pib2,NumeroDePontosTuristicos2,densidadePopulacional2,pibPerCapita2);
-return 0;
+printf("CARTA DO JOGADOR 01 \n\nCARTA: %s\nEstado:%s\nCódigo:%s\nCidade: %s\nPopulação:%lu\nArea: %.2f Km²\nPib: %.2f bilhões de reais\nNumero de pontos turisticos:%i\nDensidade populacional: %.2f hab/Km²\nPib per capita: %.2f reais\nSuper poder: %.2f\n\n",
+    carta1,estado1,codigo1,cidade1,populacao1,area1,pib1,NumeroDePontosTuristicos1,densidadePopulacional1,pibPerCapita1,resultadoSuperPoder1);
+
+printf("CARTA DO JOGADOR 02 \n\nCARTA: %s\nEstado:%s\nCódigo:%s\nCidade: %s\nPopulação:%lu\nArea: %.2f Km²\nPib: %.2f bilhões de reais\nNumero de pontos turisticos:%i\nDensidade populacional: %.2f hab/Km²\nPib per capita: %.2f reais\nSuper poder: %.2f\n\n",
+    carta2,estado2,codigo2,cidade2,populacao2,area2,pib2,NumeroDePontosTuristicos2,densidadePopulacional2,pibPerCapita2,resultadoSuperPoder2);
+
+    printf("****COMPARAÇÃO ENTRE AS CARTAS****\n\n");
+    printf("Se o resultado for igual a 1 o atributo vencedor da comparação sera da carta do JOGADOR 1\n");
+    printf("Se o resultado for igual a 0 o atributo vencedor da comparação sera da carta do JOGADOR 2\n\n");
+
+    printf("POPULAÇÃO: VENCEU(%lu)\n",resultadoPopulacao);
+    printf("ÁREA: VENCEU(%i)\n",resultadoArea);
+    printf("PIB: VENCEU(%i)\n",resultadoPIB);
+    printf("PONTOS TURISTICOS: VENCEU(%i)\n",resultadoPontosTuristicos);
+    printf("DENSIDADE POPULACIONAL: VENCEU(%i)\n",resultadoDensidadePopulacional); 
+    printf("PIB PER CAPITA: VENCEU(%i)\n",resultadoPIbPerCapita);
+    printf("SUPER PODER: VENCEU(%.0f)\n",(float)resultadoFinalSuperPoder);
+    return 0;
 }
 
 //FIM DO CODIGO
